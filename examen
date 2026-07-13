@@ -1,0 +1,107 @@
+planes = {
+    'F001': ['Plan Básico', 'mensual', 1, False, False, 'libre'],
+    'F002': ['Plan Full', 'mensual', 1, True, True, 'libre'],
+    'F003': ['Plan Estudiante', 'trimestral', 3, False, True, 'tarde'],
+    'F004': ['Plan Senior', 'trimestral', 3, True, False, 'mañana'],
+    'F005': ['Plan Anual Pro', 'anual', 12, True, True, 'libre'],
+    'F006': ['Plan Nocturno', 'mensual', 1, False, True, 'noche'],
+}
+
+inscripciones = {
+    'F001': [14990, 30],
+    'F002': [22990, 10],
+    'F003': [39990, 0],
+    'F004': [35990, 6],
+    'F005': [159990, 2],
+    'F006': [18990, 15],
+}
+
+
+
+print("======================MENU PRINIPAL=============================")
+print("1. cupos por tipo de plan ")
+print("2. Búsqueda de planes por rango de precio")
+print("3. Actualizar precio de plan")
+print("4. Agregar plan")
+print("5. Eliminar plan")
+print("6. salir")
+print("================================================================")
+
+
+
+def leer_opcion():
+    while True:
+        opcion = input("igrese una opcion")
+        if opcion == "":
+            print("ERROR. La opcion no puede quedar vacia")
+        elif opcion.strip() == " ":
+            print("ERROR. la opcion no puede contener solo espacios")
+        else
+            try:
+                opcion = int(opcion)
+                if opcion not in (1,2,3,4,5,6):
+                    print("ERROR. la opcio no es valida")
+                else: 
+                    return opcion
+            except ValueError as e:
+                print("ERRR. la opcion ingresada no es valida")
+                print("detalle del error,", e)
+
+
+
+def detalles_cupo(detalle_cu):
+    print("=" * 20)
+    print(f"El plan{detalle_cu} se encuentra en el diccionario")
+    print(f"detalles del plan:{ planes[detalle_cu]}")
+    print(f"tipo de plan:{planes[detalle_cu][0]} ")
+    print(f"precio:{inscripciones[detalle_cu][0]}")
+
+
+
+def stock_de_planes():
+    print("stock de planes")
+    detalles_cupo = input("ingresa el plan a buscar: ")
+    if detalles_cupo == "":
+            print("ERROR. La opcion no puede quedar vacia")
+    elif detalles_cupo.strip() == " ":
+       print("ERROR. la opcion no puede contener solo espacios")
+    elif detalles_cupo not in planes:
+        print(f"el plan {detalles_cupo}no se encuentra")
+
+
+
+def rengo_de_pecios():
+    while True:
+        precio_min = input("ingresa el precio")
+        precio_max = input("ingresa el precio")
+        if precio_min or precio_max == "":
+            print("ERROR. La opcion no puede quedar vacia")
+        elif precio_min.strip or precio_max.strip () == " ":
+            print("ERROR. la opcion no puede contener solo espacios")
+        else:
+            try
+                precio_min = float(precio_min)
+                precio_max = float(precio_max)
+                if precio_min < 0 or precio_max < 0:
+                    print("ERROR. el precio no puede ser negativo")
+                if precio_min > precio_max:
+                    print("ERROR. precio minimonopuede ser mayor al maximo")
+                    return precio_min, precio_max
+            except ValueError as e:
+                print("ERRR. la opcion ingresada no es valida")
+                print("detalle del error,",e)
+
+
+def rango_de_precio():
+    precio_min, precio_max = rango_de_precio()
+    plan_en_rango = []
+    for plan, (precio, stock) in inscripciones.items():
+        if(precio_min <= precio <= precio_max) and (stock > 0):
+            plan_en_rango.append((plan,inscripciones[plan][0], precio,stock))
+        if plan_en_rango:
+            print(f"plandisponible {precio_min} - {precio_max}:")
+            for plan, inscripciones, stock in plan_en_rango
+            print(f"plan: {plan}, precio: {precio}, cupos: {stock}") 
+        else
+            print(f"no se encuentra {precio_min} - {precio_max}")
+
